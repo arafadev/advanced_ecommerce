@@ -20,6 +20,8 @@ Route::get('/checkout', [FrontendController::class, 'checkout'])->name('frontend
 Route::get('/detail', [FrontendController::class, 'detail'])->name('frontend.detail');
 Route::get('/shop', [FrontendController::class, 'shop'])->name('frontend.shop');
 
+    
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

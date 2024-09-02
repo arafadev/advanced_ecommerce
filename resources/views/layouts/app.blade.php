@@ -37,7 +37,7 @@
 </head>
 
 <body>
-    <div id="app" class="page-holder {{ request()->routeIs('frontend.detail') ? 'bg-light' : null }}" >
+    <div id="app" class="page-holder {{ request()->routeIs('frontend.detail') ? 'bg-light' : null }}">
 
         <!-- navbar-->
         <header class="header bg-white">
@@ -58,7 +58,7 @@
                                 <a class="nav-link" href="{{ route('frontend.shop') }}">Shop</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="detail.html">Product detail</a>
+                                <a class="nav-link" href="{{ route('frontend.detail') }}">Product detail</a>
                             </li>
                             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown"
                                     href="#" data-toggle="dropdown" aria-haspopup="true"
@@ -77,20 +77,21 @@
                                 </div>
                             </li>
                         </ul>
-                     
+
                     </div>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link" href="{{ route('frontend.cart') }}"> <i
                                     class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small
                                     class="text-gray">(2)</small></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"> <i
-                                    class="far fa-heart mr-1"></i><small class="text-gray"> (0)</small></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"> <i class="far fa-heart mr-1"></i><small
+                                    class="text-gray"> (0)</small></a></li>
                         <li class="nav-item"><a class="nav-link" href="#"> <i
                                     class="fas fa-user-alt mr-1 text-gray"></i>Login</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
+
         <div class="container">
             @yield('content')
         </div>
@@ -201,16 +202,15 @@
             </div>
         </div>
     </div>
+
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('frontend/vendor/lightbox2/js/lightbox.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/nouislider/nouislider.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/owl.carousel2/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('frontend/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js') }}"></script>
     <script src="{{ asset('frontend/js/front.js') }}"></script>
+    <script src="{{ asset('frontend/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js') }}"></script>
 
 </body>
 
