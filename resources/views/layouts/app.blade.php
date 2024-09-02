@@ -205,6 +205,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+       {{-- <script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
     <script src="{{ asset('frontend/vendor/lightbox2/js/lightbox.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/nouislider/nouislider.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
