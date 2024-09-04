@@ -32,19 +32,13 @@ class LoginController extends Controller
     public function redirectTo()
     {
 
-        if (auth()->user()->roles()->first()->allowed_routes != '') {
+        if (auth()->user()->roles()->first()->allowed_route != '') {
 
-            return $this->redirectTo = auth()->user()->roles()->first()->allowed_routes . '/index';
+            return $this->redirectTo = auth()->user()->roles()->first()->allowed_route . '/index';
 
         }
 
     }
-
-
-
-
-
-
 
     /**
      * Create a new controller instance.
