@@ -20,7 +20,7 @@ return [
     |
     | This is the roles table used by Entrust to save roles to the database.
     |
-    */
+    */  
     'roles_table' => 'roles',
 
     /*

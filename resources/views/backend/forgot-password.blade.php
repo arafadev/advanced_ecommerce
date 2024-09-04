@@ -31,7 +31,7 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="{{ route('backend.login') }}">Already have an account? Login!</a>
+                                    <a class="small" href="{{ route('admin.login') }}">Already have an account? Login!</a>
                                 </div>
                             </div>
                         </div>
