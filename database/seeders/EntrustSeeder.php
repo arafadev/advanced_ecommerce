@@ -61,14 +61,15 @@ class EntrustSeeder extends Seeder
             'icon' => 'fas fa-home',
             'parent' => '0',
             'parent_original' => '0',// هو الاوريجينال نفسه ,
-            'sidebar_link' => '1',// تقريبا دا معناه ان اللينك دا هيبقي موجود ف السايد بار,
-            'appear' => '1', // هيكون ظاهر ام لا ؟,
-            'ordering' => '1' // ترتيب اللينكات (هنا انا بقوله خليه اول لينك ) ,
+            'sidebar_link' => '1',
+        ,
+            'appear' => '1',
+            'ordering' => '1'
         ]);
 
         $manageMain->parent_show = $manageMain->id;
-        $manageMain->save(); // عندك permission لأول create لحد هنا انت عملت 
-// ======================================================================================
+        $manageMain->save();
+        // ======================================================================================
 
         //  PRODUCT CATEGORIES
         $manageProductCategories = Permission::create(['name' => 'manage_product_categories', 'display_name' => 'Categories', 'route' => 'product_categories', 'module' => 'product_categories', 'as' => 'product_categories.index', 'icon' => 'fas fa-file-archive', 'parent' => '0', 'parent_original' => '0', 'sidebar_link' => '1', 'appear' => '1', 'ordering' => '5']);

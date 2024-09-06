@@ -12,7 +12,7 @@ class Permission extends EntrustPermission
         return $this->hasOne(Permission::class, 'id', 'parent');
     }
 
-    public function children()
+    public function children()  
     {
         return $this->hasMany(Permission::class, 'parent', 'id');
     }

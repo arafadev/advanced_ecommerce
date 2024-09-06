@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class ProductCategoriesController extends Controller
@@ -14,7 +15,13 @@ class ProductCategoriesController extends Controller
      */
     public function index()
     {
-        return view('backend.product_categories.index');
+
+        $categories = ProductCategory::withCount('products')
+            ->when(\request()->keyword != null, function ($query) {
+                $query->where('name', 'like', '%' . \request()->keyword . '%');
+            })
+            ->paginate(10);
+        return view('backend.product_categories.index', compact('categories'));
     }
 
     /**
@@ -25,7 +32,7 @@ class ProductCategoriesController extends Controller
     public function create()
     {
         return view('backend.product_categories.create');
-        
+
     }
 
     /**
@@ -48,7 +55,7 @@ class ProductCategoriesController extends Controller
     public function show($id)
     {
         return view('backend.product_categories.show');
-        
+
     }
 
     /**
@@ -60,7 +67,7 @@ class ProductCategoriesController extends Controller
     public function edit($id)
     {
         return view('backend.product_categories.edit');
-        
+
     }
 
     /**

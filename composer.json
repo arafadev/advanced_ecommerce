@@ -14,9 +14,11 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "mindscms/entrust": "^2.6",
+        "nicolaslopezj/searchable": "^1.13",
         "predis/predis": "*"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.7",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
