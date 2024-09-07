@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Models\ProductCategory;
+use App\Traits\UploadImgTrait;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\ProductCategory;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\ProductCategoryRequest;
+use Illuminate\Support\Facades\File;
 
 class ProductCategoriesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    use UploadImgTrait;
     public function index()
     {
         $categories = ProductCategory::withCount('products')
@@ -26,72 +26,86 @@ class ProductCategoriesController extends Controller
         return view('backend.product_categories.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        return view('backend.product_categories.create');
+        $main_categories = ProductCategory::whereNull('parent_id')->get(['id', 'name']);
+        return view('backend.product_categories.create', ['main_categories' => $main_categories]);
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(ProductCategoryRequest $request)
     {
-        //
+        $input = $request->only(['name', 'status', 'parent_id']);
+        if ($request->hasFile('cover')) {
+            $input['cover'] = $this->uploadImg($input['name'], $request->file('cover'), 'assets/product_categories');
+        }
+        ProductCategory::create($input);
+        return redirect()->route('admin.product_categories.index')->with([
+            'message' => 'Created Successfully',
+            'alert_type' => 'success'
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return view('backend.product_categories.show');
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(ProductCategory $productCategory)
     {
-        return view('backend.product_categories.edit');
+        $main_categories = ProductCategory::whereNull('parent_id')->get(['id', 'name']);
+        return view('backend.product_categories.edit', compact('main_categories', 'productCategory'));
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(ProductCategoryRequest $request, ProductCategory $productCategory)
     {
-        //
+        $input['name'] = $request->name;
+        $input['slug'] = null;
+        $input['status'] = $request->status;
+        $input['parent_id'] = $request->parent_id;
+
+        if ($image = $request->file('cover')) {
+            if ($productCategory->cover != null && File::exists('assets/product_categories/' . $productCategory->cover)) {
+                unlink('assets/product_categories/' . $productCategory->cover);
+            }
+            $input['cover'] = $this->uploadImg($input['name'], $request->file('cover'), 'assets/product_categories');
+        }
+
+        $productCategory->update($input);
+
+        return redirect()->route('admin.product_categories.index')->with([
+            'message' => 'Updated successfully',
+            'alert-type' => 'success'
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(ProductCategory $productCategory)
     {
-        //
+        if (File::exists('assets/product_categories/' . $productCategory->cover)) {
+            unlink('assets/product_categories/' . $productCategory->cover);
+        }
+        $productCategory->delete();
+
+        return redirect()->route('admin.product_categories.index')->with([
+            'message' => 'Deleted successfully',
+            'alert-type' => 'success'
+        ]);
+    }
+
+    public function remove_image(Request $request)
+    {
+        $category = ProductCategory::findOrFail($request->product_category_id);
+        if (File::exists('assets/product_categories/' . $category->cover)) {
+            unlink('assets/product_categories/' . $category->cover);
+            $category->cover = null;
+            $category->save();
+        }
+
+        return true;
     }
 }

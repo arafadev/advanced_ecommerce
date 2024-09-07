@@ -62,7 +62,6 @@ class EntrustSeeder extends Seeder
             'parent' => '0',
             'parent_original' => '0',// هو الاوريجينال نفسه ,
             'sidebar_link' => '1',
-        ,
             'appear' => '1',
             'ordering' => '1'
         ]);
