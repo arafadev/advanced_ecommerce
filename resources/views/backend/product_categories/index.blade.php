@@ -34,10 +34,10 @@
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->products_count }}</td>
                             <td>{{ $category->parent != null ? $category->parent->name : '-' }}</td>
-                            <td>{{ $category->status }}</td>
+                            <td>{{ $category->status() }}</td>
                             <td>{{ $category->created_at }}</td>
                             <td>
-                                <div class="btn-group">
+                                <div class="btn-group btn-group-sm">
                                     <a href="{{ route('admin.product_categories.edit', $category->id) }}"
                                         class="btn btn-primary">
                                         <i class="fa fa-edit"></i>
@@ -66,7 +66,7 @@
                     <tr>
                         <td colspan="6">
                             <div class="float-right">
-                                {!! $categories->links() !!}
+                                {!! $categories->appends(request()->all())->links() !!}
                             </div>
                         </td>
                     </tr>

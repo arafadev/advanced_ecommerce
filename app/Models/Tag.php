@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Nicolaslopezj\Searchable\SearchableTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tag extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, SearchableTrait;
     protected $guarded = [];
 
     public function sluggable(): array
@@ -18,6 +19,18 @@ class Tag extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    
+    protected $searchable = [
+        'columns' => [
+            'tags.name' => 10,
+        ]
+    ];
+
+    public function status()
+    {
+        return $this->status ? 'Active' : 'Inactive';
     }
 
     public function products()

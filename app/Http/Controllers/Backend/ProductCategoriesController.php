@@ -15,6 +15,10 @@ class ProductCategoriesController extends Controller
     use UploadImgTrait;
     public function index()
     {
+        if (!auth()->user()->ability('admin', 'manage_product_categories, show_product_categories')) {
+            return redirect('admin/index');
+        }
+
         $categories = ProductCategory::withCount('products')
             ->when(\request()->keyword != null, function ($query) {
                 $query->search(\request()->keyword);
@@ -29,6 +33,10 @@ class ProductCategoriesController extends Controller
 
     public function create()
     {
+        if (!auth()->user()->ability('admin', 'create_product_categories')) {
+            return redirect('admin/index');
+        }
+
         $main_categories = ProductCategory::whereNull('parent_id')->get(['id', 'name']);
         return view('backend.product_categories.create', ['main_categories' => $main_categories]);
 
@@ -37,6 +45,10 @@ class ProductCategoriesController extends Controller
 
     public function store(ProductCategoryRequest $request)
     {
+        if (!auth()->user()->ability('admin', 'create_product_categories')) {
+            return redirect('admin/index');
+        }
+
         $input = $request->only(['name', 'status', 'parent_id']);
         if ($request->hasFile('cover')) {
             $input['cover'] = $this->uploadImg($input['name'], $request->file('cover'), 'assets/product_categories');
@@ -50,12 +62,19 @@ class ProductCategoriesController extends Controller
 
     public function show($id)
     {
+        if (!auth()->user()->ability('admin', 'display_product_categories')) {
+            return redirect('admin/index');
+        }
+
         return view('backend.product_categories.show');
 
     }
 
     public function edit(ProductCategory $productCategory)
     {
+        if (!auth()->user()->ability('admin', 'update_product_categories')) {
+            return redirect('admin/index');
+        }
         $main_categories = ProductCategory::whereNull('parent_id')->get(['id', 'name']);
         return view('backend.product_categories.edit', compact('main_categories', 'productCategory'));
 
@@ -64,6 +83,9 @@ class ProductCategoriesController extends Controller
 
     public function update(ProductCategoryRequest $request, ProductCategory $productCategory)
     {
+        if (!auth()->user()->ability('admin', 'update_product_categories')) {
+            return redirect('admin/index');
+        }
         $input['name'] = $request->name;
         $input['slug'] = null;
         $input['status'] = $request->status;
@@ -86,6 +108,10 @@ class ProductCategoriesController extends Controller
 
     public function destroy(ProductCategory $productCategory)
     {
+        if (!auth()->user()->ability('admin', 'delete_product_categories')) {
+            return redirect('admin/index');
+        }
+
         if (File::exists('assets/product_categories/' . $productCategory->cover)) {
             unlink('assets/product_categories/' . $productCategory->cover);
         }
@@ -99,6 +125,10 @@ class ProductCategoriesController extends Controller
 
     public function remove_image(Request $request)
     {
+        if (!auth()->user()->ability('admin', 'delete_product_categories')) {
+            return redirect('admin/index');
+        }
+
         $category = ProductCategory::findOrFail($request->product_category_id);
         if (File::exists('assets/product_categories/' . $category->cover)) {
             unlink('assets/product_categories/' . $category->cover);
