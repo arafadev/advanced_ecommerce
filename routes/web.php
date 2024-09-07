@@ -45,6 +45,7 @@ Route::group(
             Route::resource('product_categories', ProductCategoriesController::class);
             Route::resource('products', ProductController::class);
             Route::resource('tags', TagController::class);
+            Route::post('/products/remove-image', [ProductController::class, 'remove_image'])->name('products.remove_image');
         });
     }
 );
