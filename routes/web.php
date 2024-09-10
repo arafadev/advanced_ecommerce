@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\BackendController;
-use App\Http\Controllers\Backend\ProductCategoriesController;
-use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\TagController;
+use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Backend\ProductCouponController;
+use App\Http\Controllers\Backend\ProductReviewController;
+use App\Http\Controllers\Backend\ProductCategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,11 @@ Route::group(
             Route::resource('products', ProductController::class);
             Route::resource('tags', TagController::class);
             Route::post('/products/remove-image', [ProductController::class, 'remove_image'])->name('products.remove_image');
+            Route::resource('product_coupons', ProductCouponController::class);
+            Route::resource('product_reviews', ProductReviewController::class);
+
+
+
         });
     }
 );
