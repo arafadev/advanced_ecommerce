@@ -55,4 +55,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
+
+    public function status(): string
+    {
+        return $this->status ? 'Active' : 'Inactive';
+    }
 }
