@@ -15,15 +15,13 @@ class WorldSeeder extends Seeder
     public function run()
     {
         $sql_file = public_path('world.sql');
-        $sql_statements = file_get_contents($sql_file);
+        $db = [
+            'host' => '127.0.0.1',
+            'database' => 'advanced_ecommerce',
+            'username' => 'root',
+            'password' => null,
+        ];
 
-        // قم بتقسيم SQL بناءً على الجمل المنتهية بفاصلة منقوطة
-        $queries = explode(';', $sql_statements);
-
-        foreach ($queries as $query) {
-            if (trim($query) != '') {
-                DB::unprepared($query . ';');
-            }
-        }
+        exec("mysql --user={$db['username']} --password={$db['password']} --host={$db['host']} --database={$db['database']} < $sql_file");
     }
 }
