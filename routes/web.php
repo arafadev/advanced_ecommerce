@@ -58,8 +58,6 @@ Route::group(
             // Route::resource('customer_addresses', CustomerAddressController::class);
             Route::post('/supervisors/remove-image', [SupervisorController::class, 'remove_image'])->name('supervisors.remove_image');
             Route::resource('supervisors', SupervisorController::class);
-
-
         });
     }
 );

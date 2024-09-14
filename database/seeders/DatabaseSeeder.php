@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductsImagesSeeder::class);
         $this->call(ProductCouponSeeder::class);
         $this->call(ProductReviewSeeder::class);
+        $this->call(WorldSeeder::class);
+
 
     }
 }
