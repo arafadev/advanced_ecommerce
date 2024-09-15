@@ -30,9 +30,9 @@ class Country extends Model
         return $this->hasMany(State::class);
     }
 
-    // public function addresses(): HasMany
-    // {
-    //     return $this->hasMany(UserAddress::class);
-    // }
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(UserAddress::class);
+    }
 
 }
