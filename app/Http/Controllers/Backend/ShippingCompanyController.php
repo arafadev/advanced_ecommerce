@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ShippingCompanyRequest;
 use App\Models\Country;
-use App\Models\ShippingCompany; 
+use App\Models\ShippingCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,15 +13,15 @@ class ShippingCompanyController extends Controller
 {
     public function index()
     {
-        if (!Auth::user()->ability('admin', 'manage_shipping_companies,show_shipping_companies')){
+        if (!Auth::user()->ability('admin', 'manage_shipping_companies,show_shipping_companies')) {
             return redirect('admin/index');
         }
 
         $shipping_companies = ShippingCompany::withCount('countries')
-            ->when(\request()->keyword != '', function ($q){
+            ->when(\request()->keyword != '', function ($q) {
                 $q->search(\request()->keyword);
             })
-            ->when(\request()->status != '', function ($q){
+            ->when(\request()->status != '', function ($q) {
                 $q->whereStatus(\request()->status);
             })
             ->orderBy(\request()->sort_by ?? 'id', \request()->order_by ?? 'desc')
@@ -32,7 +32,7 @@ class ShippingCompanyController extends Controller
 
     public function create()
     {
-        if (!Auth::user()->ability('admin', 'create_shipping_companies')){
+        if (!Auth::user()->ability('admin', 'create_shipping_companies')) {
             return redirect('admin/index');
         }
         $countries = Country::orderBy('id', 'asc')->get(['id', 'name']);
@@ -41,11 +41,12 @@ class ShippingCompanyController extends Controller
 
     public function store(ShippingCompanyRequest $request)
     {
-        if (!Auth::user()->ability('admin', 'create_shipping_companies')){
+        if (!Auth::user()->ability('admin', 'create_shipping_companies')) {
             return redirect('admin/index');
         }
 
         if ($request->validated()) {
+
             $shipping_company = ShippingCompany::create($request->except('countries', '_token', 'submit'));
             $shipping_company->countries()->attach(array_values($request->countries));
 
@@ -63,7 +64,7 @@ class ShippingCompanyController extends Controller
 
     public function edit(ShippingCompany $shipping_company)
     {
-        if (!Auth::user()->ability('admin', 'update_shipping_companies')){
+        if (!Auth::user()->ability('admin', 'update_shipping_companies')) {
             return redirect('admin/index');
         }
 
@@ -74,7 +75,7 @@ class ShippingCompanyController extends Controller
 
     public function update(ShippingCompanyRequest $request, ShippingCompany $shipping_company)
     {
-        if (!Auth::user()->ability('admin', 'update_shipping_companies')){
+        if (!Auth::user()->ability('admin', 'update_shipping_companies')) {
             return redirect('admin/index');
         }
 
@@ -98,7 +99,7 @@ class ShippingCompanyController extends Controller
 
     public function destroy(ShippingCompany $shipping_company)
     {
-        if (!Auth::user()->ability('admin', 'delete_shipping_companies')){
+        if (!Auth::user()->ability('admin', 'delete_shipping_companies')) {
             return redirect('admin/index');
         }
         $shipping_company->delete();

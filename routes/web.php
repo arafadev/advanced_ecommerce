@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\SupervisorController;
 use App\Http\Controllers\Backend\ProductCouponController;
 use App\Http\Controllers\Backend\ProductReviewController;
 use App\Http\Controllers\Backend\CustomerAddressController;
+use App\Http\Controllers\Backend\ShippingCompanyController;
 use App\Http\Controllers\Backend\ProductCategoriesController;
 
 /*
@@ -70,8 +71,10 @@ Route::group(
             Route::resource('customer_addresses', CustomerAddressController::class);
             Route::get('cities/get_cities', [CityController::class, 'get_cities'])->name('cities.get_cities');
             Route::get('states/get_states', [StateController::class, 'get_states'])->name('states.get_states');
-            Route::resource('shipping_companies', Backend\ShippingCompanyController::class);
-
+            Route::resource('shipping_companies', ShippingCompanyController::class);
+            Route::get('/account_settings', [BackendController::class, 'account_settings'])->name('account_settings');
+            Route::patch('/account_settings', [BackendController::class, 'update_account_settings'])->name('update_account_settings');
+            Route::post('/admin/remove-image', action: [BackendController::class, 'remove_image'])->name('remove_image');
 
         });
     }
