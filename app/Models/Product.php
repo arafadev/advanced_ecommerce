@@ -30,7 +30,7 @@ class Product extends Model
         return $this->status ? 'Active' : 'Inactive';
     }
 
-    public function featured()
+    public function scopeFeatured()
     {
         return $this->featured ? 'Yes' : 'No';
     }
@@ -45,12 +45,32 @@ class Product extends Model
     {
         return $this->morphToMany(Tag::class, 'taggable');
     }
+    public function scopeFeature($query)
+    {
+        return $query->whereFeatured(true);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
+    }
+    public function scopeHasQuantity($query)
+    {
+        return $query->where('quantity', '>', 0);
+    }
+
+    public function scopeActiveCategory($query)
+    {
+        return $query->whereHas('category', function ($query) {
+            $query->whereStatus(1);
+        });
+    }
 
     public function firstMedia(): MorphOne
     {
         return $this->morphOne(Media::class, 'mediable')->orderBy('file_sort', 'asc');
     }
-    
+
     public function media(): MorphMany
     {
         return $this->morphMany(Media::class, 'mediable');

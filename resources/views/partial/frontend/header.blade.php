@@ -17,7 +17,7 @@
                                 <a class="nav-link" href="{{ route('frontend.shop') }}">Shop</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('frontend.detail') }}">Product detail</a>
+                                <a class="nav-link" href="{{ route('frontend.product') }}">Product detail</a>
                             </li>
                             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown"
                                     href="#" data-toggle="dropdown" aria-haspopup="true"
@@ -28,7 +28,7 @@
                                         class="dropdown-item border-0 transition-link"
                                         href="{{ route('frontend.shop') }}">Category</a><a
                                         class="dropdown-item border-0 transition-link"
-                                        href="{{ route('frontend.detail') }}">Product
+                                        href="{{ route('frontend.product') }}">Product
                                         detail</a><a class="dropdown-item border-0 transition-link"
                                         href="{{ route('frontend.cart') }}">Shopping cart</a><a
                                         class="dropdown-item border-0 transition-link"
@@ -51,8 +51,7 @@
                                         class="fas fa-user-alt mr-1 text-gray"></i>Login</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('register') }}"> <i
                                         class="fas fa-user-alt mr-1 text-gray"></i>Register</a></li>
-
-                            @else
+                        @else
                             <li class="nav-item dropdown">
 
                                 <a href="#" class="nav-link dropdown-toggle" id="authDropDown" data-toggle="dropdown"
@@ -63,7 +62,8 @@
                                 <div class="dropdown-menu mt-3" aria-labelledby="authDropDown">
 
                                     <a href="#" class="dropdown-item border-0">My Profile</a>
-                                    <a href="javascript:void(0);" class="dropdown-item border-0" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Logout</a>
+                                    <a href="javascript:void(0);" class="dropdown-item border-0"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Logout</a>
                                     <form action="{{ route('logout') }}" method="post" id="logout-form" class="d-none">
                                         @csrf
                                     </form>

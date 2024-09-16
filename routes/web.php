@@ -28,9 +28,9 @@ use App\Http\Controllers\Backend\ProductCategoriesController;
 */
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
+Route::get('/product/{slug?}', [FrontendController::class, 'product'])->name('frontend.product');
 Route::get('/cart', [FrontendController::class, 'cart'])->name('frontend.cart');
 Route::get('/checkout', [FrontendController::class, 'checkout'])->name('frontend.checkout');
-Route::get('/detail', [FrontendController::class, 'detail'])->name('frontend.detail');
 Route::get('/shop', [FrontendController::class, 'shop'])->name('frontend.shop');
 
 Auth::routes(['verify' => true]);
@@ -74,7 +74,7 @@ Route::group(
             Route::resource('shipping_companies', ShippingCompanyController::class);
             Route::get('/account_settings', [BackendController::class, 'account_settings'])->name('account_settings');
             Route::patch('/account_settings', [BackendController::class, 'update_account_settings'])->name('update_account_settings');
-            Route::post('/admin/remove-image', action: [BackendController::class, 'remove_image'])->name('remove_image');
+            Route::post('/admin/remove-image', [BackendController::class, 'remove_image'])->name('remove_image');
 
         });
     }
