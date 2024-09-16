@@ -13,7 +13,6 @@ class FrontendController extends Controller
     {
 
         $product_categories = ProductCategory::whereStatus(1)->whereNull('parent_id')->get();
-        $featured_product = Product::with('firstMedia')->inRandomOrder()->feature()->Active()->hasQuantity()->ActiveCategory()->take(8)->get();
         return view('frontend.index', get_defined_vars());
     }
 

@@ -63,10 +63,10 @@ class ProductController extends Controller
             $i = 1;
 
             foreach ($request->images as $image) {
-
-                $file_name = $product->slug . '_' . time() . '_' . $i . '.' . $image->getClientOriginalExtension();
+                $file_name = $product->slug. '_' . time() . '_' . $i . '.' . $image->getClientOriginalExtension();
                 $file_size = $image->getSize();
                 $file_type = $image->getMimeType();
+                $path = public_path('assets/products/' . $file_name);
                 $image->move(public_path('assets/products/'), $file_name);
                 $product->media()->create([
                     'file_name' => $file_name,
