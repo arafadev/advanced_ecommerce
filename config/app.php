@@ -232,8 +232,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Entrust'   => Mindscms\Entrust\EntrustFacade::class,   
+        'Entrust' => Mindscms\Entrust\EntrustFacade::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
 
-    ],
+
+    ],  
 
 ];
