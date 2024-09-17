@@ -1,4 +1,4 @@
-<div>
+<div wire:ignore>
     <!-- TRENDING PRODUCTS-->
     <section class="py-5">
         <header>
@@ -18,14 +18,15 @@
                                     alt="{{ $featuredProduct->name }}"></a>
                             <div class="product-overlay">
                                 <ul class="mb-0 list-inline">
-                                    <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
-                                            href="#"><i class="far fa-heart"></i></a></li>
-                                    <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                            href="#">Add
-                                            to
-                                            cart</a></li>
+                                    <li class="list-inline-item m-0 p-0"><a
+                                            wire:click.prevent="addToWishList({{ $featuredProduct->id }})"
+                                            class="btn btn-sm btn-outline-dark" href="#"><i
+                                                class="far fa-heart"></i></a></li>
+                                    <li class="list-inline-item m-0 p-0"><a
+                                            wire:click.prevent="addToCart({{ $featuredProduct->id }})"
+                                            class="btn btn-sm btn-dark" href="#">Add to cart</a></li>
                                     <li class="list-inline-item mr-0"><a
-                                            wire:click="$emit('showProductModalAction', '{{ $featuredProduct->slug }}')"
+                                            wire:click.prevent="$emit('showProductModalAction', '{{ $featuredProduct->slug }}')"
                                             class="btn btn-sm btn-outline-dark" data-target="#productView"
                                             data-toggle="modal"><i class="fas fa-expand"></i></a>
                                     </li>
