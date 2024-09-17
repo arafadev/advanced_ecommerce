@@ -25,8 +25,13 @@ class ProductModalShared extends Component
         if ($this->productModal->quantity > $this->quantity) {
             $this->quantity++;
         } else {
-            $this->alert('warning', 'This is maximum quantity you can add!');
-        }
+            $this->dispatchBrowserEvent('swal:alert', [
+                'type'    => 'warning',
+                'message' => 'This is maximum quantity you can add!',
+                'position' => 'top-end',
+                'timer' => 5000,
+                'toast' => true,
+            ]);        }
 
     }
 

@@ -65,6 +65,24 @@
     <script src="{{ asset('frontend/js/front.js') }}"></script>
     <script src="{{ asset('frontend/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js') }}"></script>
     <livewire:scripts />
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <x-livewire-alert::scripts /> --}}
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        window.addEventListener('swal:alert', event => {
+            Swal.fire({
+                icon: event.detail.type,
+                title: event.detail.message,
+                position: event.detail.position,
+                timer: event.detail.timer,
+                toast: event.detail.toast,
+                showConfirmButton: false,
+            });
+        });
+    </script>
+
     @yield('script')
 </body>
 
