@@ -8,11 +8,27 @@ use Livewire\Component;
 class ProductModalShared extends Component
 {
     public $productModalCount = false;
-    public $productModal = [];
+    public $productModal = []; // the current product 
     public $quantity = 1;
-    protected $listeners = [
-        'showProductModalAction'
-    ];
+    protected $listeners = ['showProductModalAction'];
+
+    public function decreaseQuantity()
+    {
+        if ($this->quantity > 1) {
+            $this->quantity--;
+
+        }
+    }
+
+    public function increaseQuantity()
+    {
+        if ($this->productModal->quantity > $this->quantity) {
+            $this->quantity++;
+        } else {
+            $this->alert('warning', 'This is maximum quantity you can add!');
+        }
+
+    }
 
     public function showProductModalAction($slug)
     {
