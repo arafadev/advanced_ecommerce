@@ -15,6 +15,14 @@ class FrontendController extends Controller
         $product_categories = ProductCategory::whereStatus(1)->whereNull('parent_id')->get();
         return view('frontend.index', get_defined_vars());
     }
+    public function shop($slug = null)
+    {
+        return view('frontend.shop', compact('slug'));
+    }
+    public function shop_tag($slug = null)
+    {
+        return view('frontend.shop_tag', compact('slug'));
+    }
     public function product($slug)
     {
         $product = Product::with('media', 'category', 'tags', 'reviews')->withAvg('reviews', 'rating')
@@ -44,10 +52,4 @@ class FrontendController extends Controller
         return view('frontend.checkout');
     }
 
- 
-
-    public function shop()
-    {
-        return view('frontend.shop');
-    }
 }

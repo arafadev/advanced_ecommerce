@@ -17,7 +17,7 @@
                                 <a class="nav-link" href="{{ route('frontend.shop') }}">Shop</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('frontend.product') }}">Product detail</a>
+                                {{-- <a class="nav-link" href="{{ route('frontend.product') }}">Product detail</a> --}}
                             </li>
                             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown"
                                     href="#" data-toggle="dropdown" aria-haspopup="true"
@@ -28,7 +28,7 @@
                                         class="dropdown-item border-0 transition-link"
                                         href="{{ route('frontend.shop') }}">Category</a><a
                                         class="dropdown-item border-0 transition-link"
-                                        href="{{ route('frontend.product') }}">Product
+                                        href="">Product
                                         detail</a><a class="dropdown-item border-0 transition-link"
                                         href="{{ route('frontend.cart') }}">Shopping cart</a><a
                                         class="dropdown-item border-0 transition-link"
