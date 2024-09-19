@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Frontend;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Cart;
 
 class ShopProductsTagComponent extends Component
 {
@@ -27,7 +27,7 @@ class ShopProductsTagComponent extends Component
 
         } else {
             Cart::instance('default')->add($product->id, $product->name, 1, $product->price)->associate(Product::class);
-            // $this->emit('updateCart');
+            $this->emit('updateCart');
             $this->dispatchBrowserEvent('swal:alert', ['type'=> 'success','message' => 'product stored in your wishlist successfully','position' => 'top-end','timer' => 5000,'toast' => true,]); 
         }
     }
@@ -43,7 +43,7 @@ class ShopProductsTagComponent extends Component
 
         } else {
             Cart::instance('wishlist')->add($product->id, $product->name, 1, $product->price)->associate(Product::class);
-            // $this->emit('updateCart');
+            $this->emit('updateCart');
             $this->dispatchBrowserEvent('swal:alert', ['type'=> 'success','message' => 'product stored in your wishlist successfully','position' => 'top-end','timer' => 5000,'toast' => true,]); 
 
         }

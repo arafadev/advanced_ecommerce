@@ -27,7 +27,7 @@ class ProductCoupon extends Model
 
     public function discount($total)
     {
-        if (!$this->checkDate() || !$this->checkUsedTimes()) {
+        if (!$this->checkDate() || !$this->checkUsedTimes()){
             return 0;
         }
         return $this->checkGreaterThan($total) ? $this->doProcess($total) : 0;

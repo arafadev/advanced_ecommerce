@@ -43,6 +43,7 @@ class ProductModalShared extends Component
         }else{
             
         Cart::instance('default')->add($this->productModal->id,$this->productModal->name,$this->productModal->quantity,$this->productModal->price,)->associate(Product::class); 
+        $this->emit('updateCart');
         // back to quantity 1 in input
         $this->quantity = 1;
         // show success message
@@ -63,7 +64,7 @@ class ProductModalShared extends Component
          $this->dispatchBrowserEvent('swal:alert', ['type' => 'error','message' => 'product already exist!','position' => 'top-end','timer' => 5000,'toast' => true]); 
         } else {
             Cart::instance('wishlist')->add($this->productModal->id, $this->productModal->name, 1, $this->productModal->price)->associate(Product::class);
-            // $this->emit('updateCart');
+            $this->emit('updateCart');
           // show success message
           $this->dispatchBrowserEvent('swal:alert', ['type'=> 'success','message' => 'product stored in your wishlist successfully','position' => 'top-end','timer' => 5000,'toast' => true,]); 
         }

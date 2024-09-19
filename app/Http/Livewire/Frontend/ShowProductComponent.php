@@ -43,7 +43,7 @@ class ShowProductComponent extends Component
 
         } else {
             Cart::instance('default')->add($this->product->id, $this->product->name, 1, $this->product->price)->associate(Product::class);
-            // $this->emit('updateCart');
+            $this->emit('updateCart');
             $this->dispatchBrowserEvent('swal:alert', ['type' => 'success','message' => 'product stored in your cart successfully','position' => 'top-end','timer' => 5000,'toast' => true]); 
 
         }
@@ -58,7 +58,7 @@ class ShowProductComponent extends Component
             $this->dispatchBrowserEvent('swal:alert', ['type' => 'error','message' => 'product already exist!','position' => 'top-end','timer' => 5000,'toast' => true]); 
         } else {
             Cart::instance('wishlist')->add($this->product->id, $this->product->name, 1, $this->product->price)->associate(Product::class);
-            // $this->emit('updateCart');
+            $this->emit('updateCart');
             $this->dispatchBrowserEvent('swal:alert', ['type'=> 'success','message' => 'product stored in your wishlist successfully','position' => 'top-end','timer' => 5000,'toast' => true,]); 
 
         }

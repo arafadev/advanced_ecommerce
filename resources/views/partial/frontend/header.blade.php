@@ -27,8 +27,7 @@
                                         href="{{ route('frontend.index') }}">Homepage</a><a
                                         class="dropdown-item border-0 transition-link"
                                         href="{{ route('frontend.shop') }}">Category</a><a
-                                        class="dropdown-item border-0 transition-link"
-                                        href="">Product
+                                        class="dropdown-item border-0 transition-link" href="">Product
                                         detail</a><a class="dropdown-item border-0 transition-link"
                                         href="{{ route('frontend.cart') }}">Shopping cart</a><a
                                         class="dropdown-item border-0 transition-link"
@@ -39,11 +38,9 @@
 
                     </div>
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="{{ route('frontend.cart') }}"> <i
-                                    class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small
-                                    class="text-gray">(2)</small></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"> <i class="far fa-heart mr-1"></i><small
-                                    class="text-gray"> (0)</small></a></li>
+                    <livewire:frontend.carts />
+                       
+
 
                         @guest
 
