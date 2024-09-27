@@ -27,9 +27,9 @@
          </div>
 
          @if ($customer_address_id != 0)
-         <br>
+             <br>
              <h2 class="h5 text-uppercase mb-4">Sipping way</h2>
-         
+
              <div class="row">
                  @forelse($shipping_companies as $shipping_company)
                      <div class="col-6 form-group">
@@ -55,7 +55,7 @@
              </div>
          @endif
 
-         {{-- @if ($customer_address_id != 0 && $shipping_company_id != 0)
+         @if ($customer_address_id != 0 && $shipping_company_id != 0)
              <h2 class="h5 text-uppercase mb-4">Payment way</h2>
              <div class="row">
                  @forelse($payment_methods as $payment_method)
@@ -76,8 +76,8 @@
                      <p>No payment way found</p>
                  @endforelse
              </div>
-         @endif --}}
-{{-- 
+         @endif
+  
          @if ($customer_address_id != 0 && $shipping_company_id != 0 && $payment_method_id != 0)
              @if (\Str::lower($payment_method_code) == 'ppex')
                  <form action="{{ route('checkout.payment') }}" method="post">
@@ -93,10 +93,7 @@
                      </button>
                  </form>
              @endif
-         @endif --}}
-
-
-
+         @endif
 
      </div>
      <!-- ORDER SUMMARY-->

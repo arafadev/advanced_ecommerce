@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\CountryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CustomerController;
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\SupervisorController;
 use App\Http\Controllers\Backend\PaymentMethodController;
@@ -38,8 +39,11 @@ Route::get('/wishlist', [FrontendController::class, 'wishlist'])->name('frontend
 Route::get('/shop/{slug?}', [FrontendController::class, 'shop'])->name('frontend.shop');
 
 
-Route::get('/checkout', [FrontendController::class, 'checkout'])->name('frontend.checkout');
-Route::group(['middleware' => ['roles', 'role:customer']], function () {});
+Route::group(['middleware' => ['roles', 'role:customer']], function () {
+    Route::get('/checkout', [FrontendController::class, 'checkout'])->name('frontend.checkout');
+    Route::post('/checkout/payment', [PaymentController::class, 'checkout_now'])->name('checkout.payment');
+
+});
 
 
 
