@@ -43,9 +43,6 @@ class ShippingCompanySeeder extends Seeder
         ]);
         $sh02->countries()->attach([194]);
 
-
-
-
         $countriesIds = Country::where('id', '!=', 194)->pluck('id')->toArray();
 
         $sh03 = ShippingCompany::create([

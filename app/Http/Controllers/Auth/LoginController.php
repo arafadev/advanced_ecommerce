@@ -73,16 +73,6 @@ class LoginController extends Controller
 
     }
 
-    protected function loggedOut(Request $request)
-    {
-        Cache::forget('admin_side_menu');
-        Cache::forget('role_routes');
-        Cache::forget('user_routes');
-    }
-
-
-
-
     /**
      * Get the login username to be used by the controller.
      *

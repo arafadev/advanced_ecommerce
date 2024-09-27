@@ -20,7 +20,7 @@ class EntrustSeeder extends Seeder
     {
 
         $faker = Faker::create();
-        
+
         $adminRole = Role::create(['name' => 'admin', 'display_name' => 'Administration', 'description' => 'Administrator', 'allowed_route' => 'admin',]);
         $supervisorRole = Role::create(['name' => 'supervisor', 'display_name' => 'Supervisor', 'description' => 'Supervisor', 'allowed_route' => 'admin',]);
         $customerRole = Role::create(['name' => 'customer', 'display_name' => 'Customer', 'description' => 'Customer', 'allowed_route' => null,]);
@@ -61,7 +61,7 @@ class EntrustSeeder extends Seeder
             'as' => 'index',
             'icon' => 'fas fa-home',
             'parent' => '0',
-            'parent_original' => '0',// هو الاوريجينال نفسه ,
+            'parent_original' => '0', // هو الاوريجينال نفسه ,
             'sidebar_link' => '1',
             'appear' => '1',
             'ordering' => '1'
@@ -185,6 +185,15 @@ class EntrustSeeder extends Seeder
         $updateShippingCompanies = Permission::create(['name' => 'update_shipping_companies', 'display_name' => 'Update Shipping Company', 'route' => 'shipping_companies/{shipping_companies}/edit', 'module' => 'shipping_companies', 'as' => 'shipping_companies.edit', 'icon' => null, 'parent' => $manageShippingCompanies->id, 'parent_show' => $manageShippingCompanies->id, 'parent_original' => $manageShippingCompanies->id, 'appear' => '0', 'ordering' => '0',]);
         $destroyShippingCompanies = Permission::create(['name' => 'delete_shipping_companies', 'display_name' => 'Delete Shipping Company', 'route' => 'shipping_companies/{shipping_companies}', 'module' => 'shipping_companies', 'as' => 'shipping_companies.delete', 'icon' => null, 'parent' => $manageShippingCompanies->id, 'parent_show' => $manageShippingCompanies->id, 'parent_original' => $manageShippingCompanies->id, 'appear' => '0', 'ordering' => '0',]);
 
+        // PAYMENT METHODS
+        $managePaymentMethods = Permission::create(['name' => 'manage_payment_methods', 'display_name' => 'Payment Methods', 'route' => 'payment_methods', 'module' => 'payment_methods', 'as' => 'payment_methods.index', 'icon' => 'fas fa-dollar-sign', 'parent' => '0', 'parent_original' => '0', 'appear' => '1', 'ordering' => '100',]);
+        $managePaymentMethods->parent_show = $managePaymentMethods->id;
+        $managePaymentMethods->save();
+        $showPaymentMethods = Permission::create(['name' => 'show_payment_methods', 'display_name' => 'Payment Methods', 'route' => 'payment_methods', 'module' => 'payment_methods', 'as' => 'payment_methods.index', 'icon' => 'fas fa-dollar-sign', 'parent' => $managePaymentMethods->id, 'parent_show' => $managePaymentMethods->id, 'parent_original' => $managePaymentMethods->id, 'appear' => '1', 'ordering' => '0',]);
+        $createPaymentMethods = Permission::create(['name' => 'create_payment_methods', 'display_name' => 'Create Payment Method', 'route' => 'payment_methods/create', 'module' => 'payment_methods', 'as' => 'payment_methods.create', 'icon' => null, 'parent' => $managePaymentMethods->id, 'parent_show' => $managePaymentMethods->id, 'parent_original' => $managePaymentMethods->id, 'appear' => '0', 'ordering' => '0',]);
+        $displayPaymentMethods = Permission::create(['name' => 'display_payment_methods', 'display_name' => 'Show Payment Method', 'route' => 'payment_methods/{payment_methods}', 'module' => 'payment_methods', 'as' => 'payment_methods.show', 'icon' => null, 'parent' => $managePaymentMethods->id, 'parent_show' => $managePaymentMethods->id, 'parent_original' => $managePaymentMethods->id, 'appear' => '0', 'ordering' => '0',]);
+        $updatePaymentMethods = Permission::create(['name' => 'update_payment_methods', 'display_name' => 'Update Payment Method', 'route' => 'payment_methods/{payment_methods}/edit', 'module' => 'payment_methods', 'as' => 'payment_methods.edit', 'icon' => null, 'parent' => $managePaymentMethods->id, 'parent_show' => $managePaymentMethods->id, 'parent_original' => $managePaymentMethods->id, 'appear' => '0', 'ordering' => '0',]);
+        $destroyPaymentMethods = Permission::create(['name' => 'delete_payment_methods', 'display_name' => 'Delete Payment Method', 'route' => 'payment_methods/{payment_methods}', 'module' => 'payment_methods', 'as' => 'payment_methods.delete', 'icon' => null, 'parent' => $managePaymentMethods->id, 'parent_show' => $managePaymentMethods->id, 'parent_original' => $managePaymentMethods->id, 'appear' => '0', 'ordering' => '0',]);
 
 
         // SUPERVISORS
@@ -196,10 +205,5 @@ class EntrustSeeder extends Seeder
         $displaysupervisors = Permission::create(['name' => 'display_supervisors', 'display_name' => 'Show Customer', 'route' => 'supervisors', 'module' => 'supervisors', 'as' => 'supervisors.show', 'icon' => null, 'parent' => $mangeSupervisors->id, 'parent_original' => $mangeSupervisors->id, 'parent_show' => $mangeSupervisors->id, 'sidebar_link' => '1', 'appear' => '0']);
         $updatesupervisors = Permission::create(['name' => 'update_supervisors', 'display_name' => 'Update Customer', 'route' => 'supervisors', 'module' => 'supervisors', 'as' => 'supervisors.edit', 'icon' => null, 'parent' => $mangeSupervisors->id, 'parent_original' => $mangeSupervisors->id, 'parent_show' => $mangeSupervisors->id, 'sidebar_link' => '1', 'appear' => '0']);
         $deletesupervisors = Permission::create(['name' => 'delete_supervisors', 'display_name' => 'Delete Customer', 'route' => 'supervisors', 'module' => 'supervisors', 'as' => 'supervisors.destroy', 'icon' => null, 'parent' => $mangeSupervisors->id, 'parent_original' => $mangeSupervisors->id, 'parent_show' => $mangeSupervisors->id, 'sidebar_link' => '1', 'appear' => '0']);
-
-
-
-
-
     }
 }

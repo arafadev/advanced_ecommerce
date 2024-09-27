@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\SupervisorController;
+use App\Http\Controllers\Backend\PaymentMethodController;
 use App\Http\Controllers\Backend\ProductCouponController;
 use App\Http\Controllers\Backend\ProductReviewController;
 use App\Http\Controllers\Backend\CustomerAddressController;
@@ -27,14 +28,21 @@ use App\Http\Controllers\Backend\ProductCategoriesController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
 Route::get('/product/{slug?}', [FrontendController::class, 'product'])->name('frontend.product');
 Route::get('/shop/{slug?}', [FrontendController::class, 'shop'])->name('frontend.shop');
 Route::get('/shop/tags/{slug}', [FrontendController::class, 'shop_tag'])->name('frontend.shop_tag');
 Route::get('/cart', [FrontendController::class, 'cart'])->name('frontend.cart');
 Route::get('/wishlist', [FrontendController::class, 'wishlist'])->name('frontend.wishlist');
-Route::get('/checkout', [FrontendController::class, 'checkout'])->name('frontend.checkout');
 Route::get('/shop/{slug?}', [FrontendController::class, 'shop'])->name('frontend.shop');
+
+
+Route::get('/checkout', [FrontendController::class, 'checkout'])->name('frontend.checkout');
+Route::group(['middleware' => ['roles', 'role:customer']], function () {});
+
+
+
 
 Auth::routes(['verify' => true]);
 
@@ -78,7 +86,8 @@ Route::group(
             Route::get('/account_settings', [BackendController::class, 'account_settings'])->name('account_settings');
             Route::patch('/account_settings', [BackendController::class, 'update_account_settings'])->name('update_account_settings');
             Route::post('/admin/remove-image', [BackendController::class, 'remove_image'])->name('remove_image');
-
+        Route::resource('payment_methods', PaymentMethodController::class);
+            
         });
     }
 );
