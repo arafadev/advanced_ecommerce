@@ -14,10 +14,12 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "league/omnipay": "^3.2",
         "livewire/livewire": "2.5",
         "mindscms/entrust": "^2.6",
         "mindscms/laravelshoppingcart": "^2.1",
         "nicolaslopezj/searchable": "^1.13",
+        "omnipay/paypal": "^3.0",
         "predis/predis": "*"
     },
     "require-dev": {
@@ -68,7 +70,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

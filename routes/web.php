@@ -42,14 +42,9 @@ Route::get('/shop/{slug?}', [FrontendController::class, 'shop'])->name('frontend
 Route::group(['middleware' => ['roles', 'role:customer']], function () {
     Route::get('/checkout', [FrontendController::class, 'checkout'])->name('frontend.checkout');
     Route::post('/checkout/payment', [PaymentController::class, 'checkout_now'])->name('checkout.payment');
-
 });
 
-
-
-
 Auth::routes(['verify' => true]);
-
 
 Route::group(
     [
