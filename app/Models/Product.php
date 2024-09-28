@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
@@ -63,9 +64,6 @@ class Product extends Model
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
-
-
-
     public function firstMedia(): MorphOne
     {
         return $this->morphOne(Media::class, 'mediable')->orderBy('file_sort', 'asc');
@@ -80,4 +78,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductReview::class);
     }
+
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class)->withPivot('quantity');
+    }
+
 }
